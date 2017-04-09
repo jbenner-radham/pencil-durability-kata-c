@@ -7,6 +7,10 @@ Pencil Durability Kata (C)
 
 The purpose of the Pencil Kata is to write code to simulate, first coarsely and then more faithfully, an ordinary graphite pencil. It includes writing and editing text, point degradation, using the eraser, and sharpening the pencil. The point of this kata to to provide a larger than trivial exercise that can be used to practice TDD. A significant portion of the effort will be in determining what tests should be written and, more importantly, written next.
 
+Requirements
+------------
+[pkg-config](https://www.freedesktop.org/wiki/Software/pkg-config/)
+
 Testing
 -------
 From a console in the project root enter:

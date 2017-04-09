@@ -9,7 +9,8 @@ The purpose of the Pencil Kata is to write code to simulate, first coarsely and 
 
 Requirements
 ------------
-[pkg-config](https://www.freedesktop.org/wiki/Software/pkg-config/)
+* C11 compliant compiler
+* [pkg-config](https://www.freedesktop.org/wiki/Software/pkg-config/)
 
 Testing
 -------

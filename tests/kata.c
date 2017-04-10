@@ -1,6 +1,7 @@
 #include <check.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "pencil.h"
 
 START_TEST(test_it_writes_to_paper)
@@ -13,12 +14,26 @@ START_TEST(test_it_writes_to_paper)
 }
 END_TEST
 
+START_TEST(test_should_append_text_to_the_paper)
+{
+    char paper[BUFSIZ] = {0};
+
+    strcpy(paper, "She sells sea shells");
+
+    const char *actual = pencil_write_to_paper(" down by the sea shore", paper);
+    const char *expected = "She sells sea shells down by the sea shore";
+
+    ck_assert_str_eq(actual, expected);
+}
+END_TEST
+
 Suite *kata_suite(void)
 {
     Suite *suite = suite_create("Pencil Durability Kata");
     TCase *tcase = tcase_create("Core");
 
     tcase_add_test(tcase, test_it_writes_to_paper);
+    tcase_add_test(tcase, test_should_append_text_to_the_paper);
     suite_add_tcase(suite, tcase);
 
     return suite;

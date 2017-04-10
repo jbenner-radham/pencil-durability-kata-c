@@ -5,7 +5,7 @@ STD = -std=c11
 # > specify CFLAGS freely themselves. Instead, arrange to pass the necessary
 # > options to the C compiler independently of CFLAGS, by writing them
 # > explicitly in the compilation commands or by defining an implicit rule [...]
-CFLAGS = $(STD) -O2 -pedantic -Wall -Wextra -Iinclude
+CFLAGS = $(STD) -O2 -Wall -Wextra -Iinclude
 
 # The first target listed acts as the default.
 test:

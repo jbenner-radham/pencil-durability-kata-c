@@ -7,5 +7,5 @@ char * pencil_write_to_paper(const char *text, char *restrict paper)
         return paper;
     }
 
-    return strncpy(paper, text, BUFSIZ);
+    return strncat(paper, text, BUFSIZ);
 }

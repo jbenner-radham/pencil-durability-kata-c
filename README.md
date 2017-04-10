@@ -11,6 +11,7 @@ Requirements
 ------------
 * POSIX environment
 * C11 compliant compiler
+* [Check](https://libcheck.github.io/check/)
 * [pkg-config](https://www.freedesktop.org/wiki/Software/pkg-config/)
 
 Testing

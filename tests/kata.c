@@ -30,11 +30,11 @@ END_TEST
 Suite *kata_suite(void)
 {
     Suite *suite = suite_create("Pencil Durability Kata");
-    TCase *tcase = tcase_create("Core");
+    TCase *write_tcase = tcase_create("Write");
 
-    tcase_add_test(tcase, test_it_writes_to_paper);
-    tcase_add_test(tcase, test_should_append_text_to_the_paper);
-    suite_add_tcase(suite, tcase);
+    tcase_add_test(write_tcase, test_it_writes_to_paper);
+    tcase_add_test(write_tcase, test_should_append_text_to_the_paper);
+    suite_add_tcase(suite, write_tcase);
 
     return suite;
 }

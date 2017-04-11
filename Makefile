@@ -6,9 +6,13 @@ STD = -std=c11
 # > options to the C compiler independently of CFLAGS, by writing them
 # > explicitly in the compilation commands or by defining an implicit rule [...]
 CFLAGS = $(STD) -O2 -Wall -Wextra -Iinclude
+TEST_BINARY = kata
 
 # The first target listed acts as the default.
 test:
-	@ $(CC) $(CFLAGS) `pkg-config --libs --cflags check` -o kata tests/kata.c && ./kata
+	@ $(CC) $(CFLAGS) `pkg-config --libs --cflags check` -o kata tests/kata.c && ./"${TEST_BINARY}"
 
-.PHONEY: test
+clean:
+	@ rm -f "${TEST_BINARY}"
+
+.PHONEY: clean test

@@ -22,6 +22,14 @@ From a console in the project root enter:
 $ make test
 ```
 
+Cleanup Build Artifacts
+-----------------------
+From a console in the project root enter:
+
+```shell
+$ make clean
+```
+
 Features
 --------
 ### Write

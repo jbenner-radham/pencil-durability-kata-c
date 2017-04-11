@@ -27,14 +27,28 @@ START_TEST(test_should_append_text_to_the_paper)
 }
 END_TEST
 
+START_TEST(test_initializes_a_pencil_with_a_point_durability)
+{
+    Pencil pencil = {0};
+    unsigned int point_durability = 9001;
+
+    pencil_ctor(&pencil, point_durability);
+    ck_assert_int_eq(pencil.point_durability, point_durability);
+}
+END_TEST
+
 Suite *kata_suite(void)
 {
     Suite *suite = suite_create("Pencil Durability Kata");
     TCase *write_tcase = tcase_create("Write");
+    TCase *point_degredation_tcase = tcase_create("Point Degradation");
 
     tcase_add_test(write_tcase, test_it_writes_to_paper);
     tcase_add_test(write_tcase, test_should_append_text_to_the_paper);
     suite_add_tcase(suite, write_tcase);
+
+    tcase_add_test(point_degredation_tcase, test_initializes_a_pencil_with_a_point_durability);
+    suite_add_tcase(suite, point_degredation_tcase);
 
     return suite;
 }

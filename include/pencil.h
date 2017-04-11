@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#define PENCIL_NEWLINE '\n'
 #define PENCIL_SPACE ' '
 
 typedef struct {
@@ -14,7 +15,13 @@ void pencil_ctor(Pencil *pencil, unsigned int point_durability)
 
 unsigned int pencil_degradation(char character)
 {
-    return (character != PENCIL_SPACE) ? 1 : 0;
+    switch (character) {
+        case PENCIL_NEWLINE:
+        case PENCIL_SPACE:
+            return 0;
+        default:
+            return 1;
+    }
 }
 
 char * pencil_write_to_paper(const char *text, char *restrict paper)

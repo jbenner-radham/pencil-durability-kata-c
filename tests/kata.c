@@ -46,6 +46,15 @@ START_TEST(test_expends_no_point_durability_writing_spaces)
 }
 END_TEST
 
+START_TEST(test_expends_no_point_durability_writing_newlines)
+{
+    unsigned int actual = pencil_degradation(PENCIL_NEWLINE);
+    unsigned int expected = 0;
+
+    ck_assert_int_eq(actual, expected);
+}
+END_TEST
+
 Suite *kata_suite(void)
 {
     Suite *suite = suite_create("Pencil Durability Kata");
@@ -58,6 +67,7 @@ Suite *kata_suite(void)
 
     tcase_add_test(point_degredation_tcase, test_initializes_a_pencil_with_a_point_durability);
     tcase_add_test(point_degredation_tcase, test_expends_no_point_durability_writing_spaces);
+    tcase_add_test(point_degredation_tcase, test_expends_no_point_durability_writing_newlines);
     suite_add_tcase(suite, point_degredation_tcase);
 
     return suite;

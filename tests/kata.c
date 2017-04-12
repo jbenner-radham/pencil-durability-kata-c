@@ -68,17 +68,17 @@ Suite *kata_suite(void)
 {
     Suite *suite = suite_create("Pencil Durability Kata");
     TCase *write_tcase = tcase_create("Write");
-    TCase *point_degredation_tcase = tcase_create("Point Degradation");
+    TCase *point_degradation_tcase = tcase_create("Point Degradation");
 
     tcase_add_test(write_tcase, test_it_writes_to_paper);
     tcase_add_test(write_tcase, test_should_append_text_to_the_paper);
     suite_add_tcase(suite, write_tcase);
 
-    tcase_add_test(point_degredation_tcase, test_initializes_a_pencil_with_a_point_durability);
-    tcase_add_test(point_degredation_tcase, test_expends_no_point_durability_writing_spaces);
-    tcase_add_test(point_degredation_tcase, test_expends_no_point_durability_writing_newlines);
-    tcase_add_test(point_degredation_tcase, test_expends_one_point_of_durability_writing_a_lowercase_character);
-    suite_add_tcase(suite, point_degredation_tcase);
+    tcase_add_test(point_degradation_tcase, test_initializes_a_pencil_with_a_point_durability);
+    tcase_add_test(point_degradation_tcase, test_expends_no_point_durability_writing_spaces);
+    tcase_add_test(point_degradation_tcase, test_expends_no_point_durability_writing_newlines);
+    tcase_add_test(point_degradation_tcase, test_expends_one_point_of_durability_writing_a_lowercase_character);
+    suite_add_tcase(suite, point_degradation_tcase);
 
     return suite;
 }

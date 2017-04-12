@@ -64,6 +64,15 @@ START_TEST(test_expends_one_point_of_durability_writing_a_lowercase_character)
 }
 END_TEST
 
+START_TEST(test_expends_two_points_of_durability_writing_an_uppercase_character)
+{
+    unsigned int actual = pencil_degradation('A');
+    unsigned int expected = 2;
+
+    ck_assert_int_eq(actual, expected);
+}
+END_TEST
+
 Suite *kata_suite(void)
 {
     Suite *suite = suite_create("Pencil Durability Kata");
@@ -78,6 +87,7 @@ Suite *kata_suite(void)
     tcase_add_test(point_degradation_tcase, test_expends_no_point_durability_writing_spaces);
     tcase_add_test(point_degradation_tcase, test_expends_no_point_durability_writing_newlines);
     tcase_add_test(point_degradation_tcase, test_expends_one_point_of_durability_writing_a_lowercase_character);
+    tcase_add_test(point_degradation_tcase, test_expends_two_points_of_durability_writing_an_uppercase_character);
     suite_add_tcase(suite, point_degradation_tcase);
 
     return suite;

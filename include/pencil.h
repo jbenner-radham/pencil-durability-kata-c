@@ -1,3 +1,4 @@
+#include <ctype.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -15,13 +16,18 @@ void pencil_ctor(Pencil *pencil, unsigned int point_durability)
 
 unsigned int pencil_degradation(char character)
 {
-    switch (character) {
-        case PENCIL_NEWLINE:
-        case PENCIL_SPACE:
-            return 0;
-        default:
-            return 1;
+    // Whitespace doesn't degrade the pencil tip.
+    if (character == PENCIL_NEWLINE || character == PENCIL_SPACE) {
+        return 0;
     }
+
+    // Lowercase letters degrade by a single point.
+    if (character == tolower(character)) {
+        return 1;
+    }
+
+    // Uppercase letters degrade by two points.
+    return 2;
 }
 
 char * pencil_write_to_paper(const char *text, char *restrict paper)

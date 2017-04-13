@@ -6,8 +6,13 @@
 
 START_TEST(test_it_writes_to_paper)
 {
+    Pencil pencil = {0};
     char paper[BUFSIZ] = {0};
-    const char *actual = pencil_write_to_paper("Hello world.", paper);
+    unsigned int point_durability = 9001;
+
+    pencil_ctor(&pencil, point_durability);
+
+    const char *actual = pencil_write_to_paper(&pencil, "Hello world.", paper);
     const char *expected = "Hello world.";
 
     ck_assert_str_eq(actual, expected);
@@ -16,11 +21,14 @@ END_TEST
 
 START_TEST(test_should_append_text_to_the_paper)
 {
+    Pencil pencil = {0};
     char paper[BUFSIZ] = {0};
+    unsigned int point_durability = 9001;
 
+    pencil_ctor(&pencil, point_durability);
     strcpy(paper, "She sells sea shells");
 
-    const char *actual = pencil_write_to_paper(" down by the sea shore", paper);
+    const char *actual = pencil_write_to_paper(&pencil, " down by the sea shore", paper);
     const char *expected = "She sells sea shells down by the sea shore";
 
     ck_assert_str_eq(actual, expected);
@@ -73,6 +81,22 @@ START_TEST(test_expends_two_points_of_durability_writing_an_uppercase_character)
 }
 END_TEST
 
+START_TEST(test_writes_text_to_a_paper_with_a_point_durability_of_4)
+{
+    Pencil pencil = {0};
+    char paper[BUFSIZ] = {0};
+    unsigned int point_durability = 4;
+
+    pencil_ctor(&pencil, point_durability);
+
+    const char *text = "text";
+    const char *actual = pencil_write_to_paper(&pencil, text, paper);
+    const char *expected = text;
+
+    ck_assert_str_eq(actual, expected);
+}
+END_TEST
+
 Suite *kata_suite(void)
 {
     Suite *suite = suite_create("Pencil Durability Kata");
@@ -88,6 +112,7 @@ Suite *kata_suite(void)
     tcase_add_test(point_degradation_tcase, test_expends_no_point_durability_writing_newlines);
     tcase_add_test(point_degradation_tcase, test_expends_one_point_of_durability_writing_a_lowercase_character);
     tcase_add_test(point_degradation_tcase, test_expends_two_points_of_durability_writing_an_uppercase_character);
+    tcase_add_test(point_degradation_tcase, test_writes_text_to_a_paper_with_a_point_durability_of_4);
     suite_add_tcase(suite, point_degradation_tcase);
 
     return suite;

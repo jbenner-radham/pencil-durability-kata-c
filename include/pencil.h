@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <ctype.h>
 #include <stdio.h>
 #include <string.h>
@@ -30,11 +31,24 @@ unsigned int pencil_degradation(char character)
     return 2;
 }
 
-char * pencil_write_to_paper(const char *text, char *restrict paper)
+char * pencil_write_to_paper(Pencil *pencil, const char *text, char *restrict paper)
 {
-    if (strlen(text) >= BUFSIZ) {
-        return paper;
+    unsigned int degradation = 0;
+    size_t text_length = strnlen(text, BUFSIZ);
+    char character;
+
+    assert(text_length < BUFSIZ);
+
+    for (size_t pos = 0; pos < text_length; ++pos) {
+        character = text[pos];
+        degradation += pencil_degradation(character);
     }
 
-    return strncat(paper, text, BUFSIZ);
+    if (pencil->point_durability >= degradation) {
+        pencil->point_durability -= degradation;
+
+        return strncat(paper, text, BUFSIZ);
+    }
+
+    return paper;
 }

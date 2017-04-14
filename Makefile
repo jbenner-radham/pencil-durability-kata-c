@@ -1,4 +1,4 @@
-STD = -std=c99
+STD = -std=gnu99
 
 # > If there are C compiler options that must be used for proper compilation of
 # > certain files, do not include them in CFLAGS. Users expect to be able to

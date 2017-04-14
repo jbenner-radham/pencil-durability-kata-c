@@ -31,18 +31,27 @@ unsigned int pencil_degradation(char character)
     return 2;
 }
 
-char * pencil_write_to_paper(Pencil *pencil, const char *text, char *restrict paper)
+unsigned int pencil_str_degradation(const char *text)
 {
     unsigned int degradation = 0;
     size_t text_length = strnlen(text, BUFSIZ);
     char character;
 
-    assert(text_length < BUFSIZ);
-
     for (size_t pos = 0; pos < text_length; ++pos) {
         character = text[pos];
         degradation += pencil_degradation(character);
     }
+
+    return degradation;
+}
+
+char * pencil_write_to_paper(Pencil *pencil, const char *text, char *restrict paper)
+{
+    size_t text_length = strnlen(text, BUFSIZ);
+
+    assert(text_length < BUFSIZ);
+
+    unsigned int degradation = pencil_str_degradation(text);
 
     if (pencil->point_durability >= degradation) {
         pencil->point_durability -= degradation;

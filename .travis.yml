@@ -1,4 +1,6 @@
 language: c
 dist: xenial
-install: sudo apt-get install check
+before_install:
+- sudo apt-get update -qq
+- sudo apt-get install -qq check
 script: make test

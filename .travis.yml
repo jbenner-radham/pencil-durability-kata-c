@@ -1,2 +1,3 @@
 language: c
+install: check
 script: make test

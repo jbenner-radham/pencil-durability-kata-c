@@ -10,7 +10,7 @@ The purpose of the Pencil Kata is to write code to simulate, first coarsely and 
 Requirements
 ------------
 * [POSIX](http://pubs.opengroup.org/onlinepubs/9699919799/) Environment
-* [C11](https://en.wikipedia.org/wiki/C11_%28C_standard_revision%29) Compliant Compiler
+* [C99](https://en.wikipedia.org/wiki/C99) Compliant Compiler
 * [Check](https://libcheck.github.io/check/)
 * [pkg-config](https://www.freedesktop.org/wiki/Software/pkg-config/)
 

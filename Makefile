@@ -1,4 +1,4 @@
-STD = -std=gnu99
+STD = -std=c99
 
 # > If there are C compiler options that must be used for proper compilation of
 # > certain files, do not include them in CFLAGS. Users expect to be able to
@@ -10,7 +10,7 @@ TEST_BINARY = kata
 
 # The first target listed acts as the default.
 test:
-	@ $(CC) $(CFLAGS) `pkg-config --libs --cflags check` -o kata tests/kata.c && ./"${TEST_BINARY}"
+	@ $(CC) $(CFLAGS) `pkg-config --libs --cflags check` -o "${TEST_BINARY}" tests/kata.c && ./"${TEST_BINARY}"
 
 clean:
 	@ rm -f "${TEST_BINARY}"

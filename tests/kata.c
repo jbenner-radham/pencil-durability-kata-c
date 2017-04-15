@@ -97,6 +97,22 @@ START_TEST(test_writes_text_to_a_paper_with_a_point_durability_of_4)
 }
 END_TEST
 
+START_TEST(test_writes_capitalized_tex_and_a_space_to_a_paper_with_a_point_durability_of_4)
+{
+    Pencil pencil = {0};
+    char paper[BUFSIZ] = {0};
+    unsigned int point_durability = 4;
+
+    pencil_ctor(&pencil, point_durability);
+
+    const char *text = "Text";
+    const char *actual = pencil_write_to_paper(&pencil, text, paper);
+    const char *expected = "Tex ";
+
+    ck_assert_str_eq(actual, expected);
+}
+END_TEST
+
 Suite *kata_suite(void)
 {
     Suite *suite = suite_create("Pencil Durability Kata");
@@ -113,6 +129,7 @@ Suite *kata_suite(void)
     tcase_add_test(point_degradation_tcase, test_expends_one_point_of_durability_writing_a_lowercase_character);
     tcase_add_test(point_degradation_tcase, test_expends_two_points_of_durability_writing_an_uppercase_character);
     tcase_add_test(point_degradation_tcase, test_writes_text_to_a_paper_with_a_point_durability_of_4);
+    tcase_add_test(point_degradation_tcase, test_writes_capitalized_tex_and_a_space_to_a_paper_with_a_point_durability_of_4);
     suite_add_tcase(suite, point_degradation_tcase);
 
     return suite;

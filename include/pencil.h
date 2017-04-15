@@ -61,5 +61,27 @@ char * pencil_write_to_paper(Pencil *pencil, const char *text, char *restrict pa
         return strncat(paper, text, BUFSIZ);
     }
 
-    return paper;
+    char text_buffer[BUFSIZ] = {0};
+    char character;
+    unsigned int character_degradation;
+    size_t pos;
+
+    for (pos = 0; pos < text_length; ++pos) {
+        character = text[pos];
+        character_degradation = pencil_degradation(character);
+
+        // Write the character if we have enough point durability.
+        if (pencil->point_durability >= character_degradation) {
+            pencil->point_durability -= character_degradation;
+            text_buffer[pos] = text[pos];
+            continue;
+        }
+
+        // Write a space if we don't have enough point durability.
+        text_buffer[pos] = ' ';
+    }
+
+    text_buffer[pos] = '\0';
+
+    return strncat(paper, text_buffer, BUFSIZ);
 }

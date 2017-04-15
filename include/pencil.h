@@ -53,26 +53,18 @@ char * pencil_write_to_paper(Pencil *pencil, const char *text, char *restrict pa
 
     assert(text_length < BUFSIZ);
 
-    unsigned int degradation = pencil_str_degradation(text);
-
-    if (pencil->point_durability >= degradation) {
-        pencil->point_durability -= degradation;
-
-        return strncat(paper, text, BUFSIZ);
-    }
-
     char text_buffer[BUFSIZ] = {0};
     char character;
-    unsigned int character_degradation;
+    unsigned int degradation;
     size_t pos;
 
     for (pos = 0; pos < text_length; ++pos) {
         character = text[pos];
-        character_degradation = pencil_degradation(character);
+        degradation = pencil_degradation(character);
 
         // Write the character if we have enough point durability.
-        if (pencil->point_durability >= character_degradation) {
-            pencil->point_durability -= character_degradation;
+        if (pencil->point_durability >= degradation) {
+            pencil->point_durability -= degradation;
             text_buffer[pos] = text[pos];
             continue;
         }

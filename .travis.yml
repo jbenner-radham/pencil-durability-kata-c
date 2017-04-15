@@ -1,6 +1,4 @@
 language: c
-dist: xenial
-before_install:
-- sudo apt-get update -qq
-- sudo apt-get install -qq check
+os: osx
+before_install: brew install check
 script: make test

@@ -135,10 +135,12 @@ Suite *kata_suite(void)
     TCase *write_tcase = tcase_create("Write");
     TCase *point_degradation_tcase = tcase_create("Point Degradation");
 
+    // Write suite.
     tcase_add_test(write_tcase, test_it_writes_to_paper);
     tcase_add_test(write_tcase, test_should_append_text_to_the_paper);
     suite_add_tcase(suite, write_tcase);
 
+    // Point degradation suite.
     tcase_add_test(point_degradation_tcase, test_initializes_a_pencil_with_a_point_durability);
     tcase_add_test(point_degradation_tcase, test_expends_no_point_durability_writing_spaces);
     tcase_add_test(point_degradation_tcase, test_expends_no_point_durability_writing_newlines);

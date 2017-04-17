@@ -40,6 +40,7 @@ unsigned int pencil_degradation(char character)
 
 unsigned int pencil_sharpen(Pencil *pencil)
 {
+    pencil->length -= 1;
     pencil->point_durability = pencil->initial_point_durability;
 
     return pencil->point_durability;

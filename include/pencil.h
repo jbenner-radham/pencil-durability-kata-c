@@ -40,6 +40,11 @@ unsigned int pencil_degradation(char character)
 
 unsigned int pencil_sharpen(Pencil *pencil)
 {
+    // If there is no remaining pencil length we do NOT sharpen.
+    if (pencil->length == 0) {
+        return pencil->point_durability;
+    }
+
     pencil->length -= 1;
     pencil->point_durability = pencil->initial_point_durability;
 

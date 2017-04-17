@@ -186,6 +186,29 @@ START_TEST(test_reduces_the_length_of_the_pencil_by_one_each_time_it_is_sharpene
 }
 END_TEST
 
+START_TEST(test_no_longer_sharpens_the_pencil_when_its_length_is_depleted)
+{
+    Pencil pencil;
+    char paper[BUFSIZ] = {0};
+    const char *text = "Hello world!";
+    unsigned int point_durability = strnlen(text, BUFSIZ);
+
+    pencil_ctor(&pencil, point_durability);
+
+    while (pencil.length > 0) {
+        pencil_sharpen(&pencil);
+    }
+
+    pencil_write_to_paper(&pencil, text, paper);
+    pencil_sharpen(&pencil);
+
+    unsigned int actual = pencil.point_durability;
+    unsigned int expected = 0;
+
+    ck_assert_int_eq(actual, expected);
+}
+END_TEST
+
 Suite *kata_suite(void)
 {
     Suite *suite = suite_create("Pencil Durability Kata");
@@ -214,6 +237,7 @@ Suite *kata_suite(void)
     tcase_add_test(sharpen_tcase, test_regains_its_initial_point_durability_when_the_pencil_is_sharpened);
     tcase_add_test(sharpen_tcase, test_should_create_a_pencil_with_an_initial_length_value);
     tcase_add_test(sharpen_tcase, test_reduces_the_length_of_the_pencil_by_one_each_time_it_is_sharpened);
+    tcase_add_test(sharpen_tcase, test_no_longer_sharpens_the_pencil_when_its_length_is_depleted);
     suite_add_tcase(suite, sharpen_tcase);
 
     return suite;

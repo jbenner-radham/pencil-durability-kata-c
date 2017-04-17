@@ -209,12 +209,31 @@ START_TEST(test_no_longer_sharpens_the_pencil_when_its_length_is_depleted)
 }
 END_TEST
 
+// Erase
+START_TEST(test_verify_a_sentence_has_a_word_count_of_13)
+{
+    Pencil pencil;
+    char paper[BUFSIZ] = {0};
+    unsigned int point_durability = 9001;
+    const char *text = "How much wood would a woodchuck chuck if a woodchuck could chuck wood?";
+
+    pencil_ctor(&pencil, point_durability);
+    pencil_write_to_paper(&pencil, text, paper);
+
+    size_t actual = paper_word_count(paper);
+    size_t expected = 13;
+
+    ck_assert_int_eq(actual, expected);
+}
+END_TEST
+
 Suite *kata_suite(void)
 {
     Suite *suite = suite_create("Pencil Durability Kata");
     TCase *write_tcase = tcase_create("Write");
     TCase *point_degradation_tcase = tcase_create("Point Degradation");
     TCase *sharpen_tcase = tcase_create("Sharpen");
+    TCase *erase_tcase = tcase_create("Erase");
 
     // Write
     tcase_add_test(write_tcase, test_it_writes_to_paper);
@@ -239,6 +258,10 @@ Suite *kata_suite(void)
     tcase_add_test(sharpen_tcase, test_reduces_the_length_of_the_pencil_by_one_each_time_it_is_sharpened);
     tcase_add_test(sharpen_tcase, test_no_longer_sharpens_the_pencil_when_its_length_is_depleted);
     suite_add_tcase(suite, sharpen_tcase);
+
+    // Erase
+    tcase_add_test(erase_tcase, test_verify_a_sentence_has_a_word_count_of_13);
+    suite_add_tcase(suite, erase_tcase);
 
     return suite;
 }

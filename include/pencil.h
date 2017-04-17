@@ -15,6 +15,28 @@ typedef struct {
     unsigned int point_durability;
 } Pencil;
 
+size_t paper_word_count(char *paper)
+{
+    size_t count = 0;
+    const char *delimiter = " ";
+    char *state;
+    char *word;
+
+    word = strtok_r(paper, delimiter, &state);
+
+    if (word == NULL) {
+        return count;
+    }
+
+    count += 1;
+
+    while((word = strtok_r(NULL, delimiter, &state))) {
+        count += 1;
+    }
+
+    return count;
+}
+
 void pencil_ctor(Pencil *pencil, unsigned int point_durability)
 {
     pencil->initial_point_durability = point_durability;

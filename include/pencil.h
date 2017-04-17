@@ -35,6 +35,13 @@ unsigned int pencil_degradation(char character)
     return 2;
 }
 
+unsigned int pencil_sharpen(Pencil *pencil)
+{
+    pencil->point_durability = pencil->initial_point_durability;
+
+    return pencil->point_durability;
+}
+
 unsigned int pencil_str_degradation(const char *text)
 {
     unsigned int degradation = 0;

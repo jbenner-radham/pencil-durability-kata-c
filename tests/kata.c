@@ -143,6 +143,21 @@ START_TEST(test_remembers_the_initial_point_durability_the_pencil_was_initialize
 }
 END_TEST
 
+START_TEST(test_regains_its_initial_point_durability_when_the_pencil_is_sharpened)
+{
+    Pencil pencil;
+    char paper[BUFSIZ] = {0};
+    unsigned int point_durability = 9001;
+    const char *text = "Hello world!";
+
+    pencil_ctor(&pencil, point_durability);
+    pencil_write_to_paper(&pencil, text, paper);
+    pencil_sharpen(&pencil);
+
+    ck_assert_int_eq(pencil.point_durability, point_durability);
+}
+END_TEST
+
 Suite *kata_suite(void)
 {
     Suite *suite = suite_create("Pencil Durability Kata");
@@ -168,8 +183,8 @@ Suite *kata_suite(void)
 
     // Sharpen
     tcase_add_test(sharpen_tcase, test_remembers_the_initial_point_durability_the_pencil_was_initialized_with);
+    tcase_add_test(sharpen_tcase, test_regains_its_initial_point_durability_when_the_pencil_is_sharpened);
     suite_add_tcase(suite, sharpen_tcase);
-
 
     return suite;
 }

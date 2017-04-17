@@ -158,6 +158,17 @@ START_TEST(test_regains_its_initial_point_durability_when_the_pencil_is_sharpene
 }
 END_TEST
 
+START_TEST(test_should_create_a_pencil_with_an_initial_length_value)
+{
+    Pencil pencil;
+    unsigned int point_durability = 9001;
+
+    pencil_ctor(&pencil, point_durability);
+
+    ck_assert_int_eq(pencil.length, PENCIL_LENGTH);
+}
+END_TEST
+
 Suite *kata_suite(void)
 {
     Suite *suite = suite_create("Pencil Durability Kata");
@@ -184,6 +195,7 @@ Suite *kata_suite(void)
     // Sharpen
     tcase_add_test(sharpen_tcase, test_remembers_the_initial_point_durability_the_pencil_was_initialized_with);
     tcase_add_test(sharpen_tcase, test_regains_its_initial_point_durability_when_the_pencil_is_sharpened);
+    tcase_add_test(sharpen_tcase, test_should_create_a_pencil_with_an_initial_length_value);
     suite_add_tcase(suite, sharpen_tcase);
 
     return suite;

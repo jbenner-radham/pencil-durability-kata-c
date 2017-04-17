@@ -5,17 +5,20 @@
 #include <stdio.h>
 #include <string.h>
 
+#define PENCIL_LENGTH 5
 #define PENCIL_NEWLINE '\n'
 #define PENCIL_SPACE ' '
 
 typedef struct {
     unsigned int initial_point_durability;
+    unsigned int length;
     unsigned int point_durability;
 } Pencil;
 
 void pencil_ctor(Pencil *pencil, unsigned int point_durability)
 {
     pencil->initial_point_durability = point_durability;
+    pencil->length = PENCIL_LENGTH;
     pencil->point_durability = point_durability;
 }
 

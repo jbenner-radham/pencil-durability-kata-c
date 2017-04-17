@@ -4,9 +4,10 @@
 #include <string.h>
 #include "pencil.h"
 
+// Write
 START_TEST(test_it_writes_to_paper)
 {
-    Pencil pencil = {0};
+    Pencil pencil;
     char paper[BUFSIZ] = {0};
     unsigned int point_durability = 9001;
 
@@ -21,7 +22,7 @@ END_TEST
 
 START_TEST(test_should_append_text_to_the_paper)
 {
-    Pencil pencil = {0};
+    Pencil pencil;
     char paper[BUFSIZ] = {0};
     unsigned int point_durability = 9001;
 
@@ -35,9 +36,10 @@ START_TEST(test_should_append_text_to_the_paper)
 }
 END_TEST
 
+// Point Degradation
 START_TEST(test_initializes_a_pencil_with_a_point_durability)
 {
-    Pencil pencil = {0};
+    Pencil pencil;
     unsigned int point_durability = 9001;
 
     pencil_ctor(&pencil, point_durability);
@@ -83,7 +85,7 @@ END_TEST
 
 START_TEST(test_writes_text_to_a_paper_with_a_point_durability_of_4)
 {
-    Pencil pencil = {0};
+    Pencil pencil;
     char paper[BUFSIZ] = {0};
     unsigned int point_durability = 4;
 
@@ -99,7 +101,7 @@ END_TEST
 
 START_TEST(test_writes_capitalized_tex_and_a_space_to_a_paper_with_a_point_durability_of_4)
 {
-    Pencil pencil = {0};
+    Pencil pencil;
     char paper[BUFSIZ] = {0};
     unsigned int point_durability = 4;
 
@@ -115,7 +117,7 @@ END_TEST
 
 START_TEST(test_writes_capitalized_tex_and_a_space_and_newline_to_a_paper_with_a_point_durability_of_4)
 {
-    Pencil pencil = {0};
+    Pencil pencil;
     char paper[BUFSIZ] = {0};
     unsigned int point_durability = 4;
 
@@ -129,18 +131,31 @@ START_TEST(test_writes_capitalized_tex_and_a_space_and_newline_to_a_paper_with_a
 }
 END_TEST
 
+// Sharpen
+START_TEST(test_remembers_the_initial_point_durability_the_pencil_was_initialized_with)
+{
+    Pencil pencil;
+    unsigned int point_durability = 9001;
+
+    pencil_ctor(&pencil, point_durability);
+
+    ck_assert_int_eq(pencil.initial_point_durability, point_durability);
+}
+END_TEST
+
 Suite *kata_suite(void)
 {
     Suite *suite = suite_create("Pencil Durability Kata");
     TCase *write_tcase = tcase_create("Write");
     TCase *point_degradation_tcase = tcase_create("Point Degradation");
+    TCase *sharpen_tcase = tcase_create("Sharpen");
 
-    // Write suite.
+    // Write
     tcase_add_test(write_tcase, test_it_writes_to_paper);
     tcase_add_test(write_tcase, test_should_append_text_to_the_paper);
     suite_add_tcase(suite, write_tcase);
 
-    // Point degradation suite.
+    // Point Degradation
     tcase_add_test(point_degradation_tcase, test_initializes_a_pencil_with_a_point_durability);
     tcase_add_test(point_degradation_tcase, test_expends_no_point_durability_writing_spaces);
     tcase_add_test(point_degradation_tcase, test_expends_no_point_durability_writing_newlines);
@@ -150,6 +165,11 @@ Suite *kata_suite(void)
     tcase_add_test(point_degradation_tcase, test_writes_capitalized_tex_and_a_space_to_a_paper_with_a_point_durability_of_4);
     tcase_add_test(point_degradation_tcase, test_writes_capitalized_tex_and_a_space_and_newline_to_a_paper_with_a_point_durability_of_4);
     suite_add_tcase(suite, point_degradation_tcase);
+
+    // Sharpen
+    tcase_add_test(sharpen_tcase, test_remembers_the_initial_point_durability_the_pencil_was_initialized_with);
+    suite_add_tcase(suite, sharpen_tcase);
+
 
     return suite;
 }

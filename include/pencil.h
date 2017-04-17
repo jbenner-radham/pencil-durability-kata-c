@@ -9,11 +9,13 @@
 #define PENCIL_SPACE ' '
 
 typedef struct {
+    unsigned int initial_point_durability;
     unsigned int point_durability;
 } Pencil;
 
 void pencil_ctor(Pencil *pencil, unsigned int point_durability)
 {
+    pencil->initial_point_durability = point_durability;
     pencil->point_durability = point_durability;
 }
 

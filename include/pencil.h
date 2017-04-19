@@ -27,7 +27,7 @@ size_t paper_word_count(char *paper)
         }
 
         // Lookback and verify we don't have a NUL pointer then check that we
-        // aren't on a space.
+        // aren't currently on a space.
         if (*(ptr - 1) == '\0' && *ptr != PENCIL_SPACE) {
             count += 1;
         }

@@ -21,19 +21,18 @@ size_t paper_word_count(char *paper)
     char *ptr = paper;
 
     do {
-        // Validate the pointer position.
         if (!*ptr) {
             break;
         }
 
         // Lookback and verify we don't have a NUL pointer then check that we
-        // aren't currently on a space.
+        // aren't currently on a space. This finds the first word.
         if (*(ptr - 1) == '\0' && *ptr != PENCIL_SPACE) {
             count += 1;
         }
 
         // Lookback and see if the prior character was a space then check that
-        // we aren't currently on a space.
+        // we aren't currently on a space. This finds subsequent words.
         if (*(ptr - 1) == PENCIL_SPACE && *ptr != PENCIL_SPACE) {
             count += 1;
         }

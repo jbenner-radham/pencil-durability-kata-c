@@ -6,6 +6,7 @@
 #endif
 
 #define KATA_NEWLINE '\n'
+#define KATA_NUL '\0'
 #define KATA_SPACE ' '
 
 #include "paper.h"

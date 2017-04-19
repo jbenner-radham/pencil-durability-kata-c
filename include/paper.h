@@ -5,9 +5,9 @@
 
 bool paper_is_first_word(char *ptr)
 {
-    // Lookback and verify we don't have a NUL pointer then check that we
-    // aren't currently on a space.
-    return (*(ptr - 1) == '\0' && *ptr != KATA_SPACE);
+    // Lookback and verify we don't have a NUL then check that we aren't
+    // currently on a space.
+    return (*(ptr - 1) == KATA_NUL && *ptr != KATA_SPACE);
 }
 
 bool paper_is_subsequent_word(char *ptr)

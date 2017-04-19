@@ -227,6 +227,16 @@ START_TEST(test_verify_a_sentence_has_a_word_count_of_13)
 }
 END_TEST
 
+START_TEST(test_verify_an_empty_string_has_a_word_count_of_0)
+{
+    char paper[BUFSIZ] = {0};
+    size_t actual = paper_word_count(paper);
+    size_t expected = 0;
+
+    ck_assert_int_eq(actual, expected);
+}
+END_TEST
+
 Suite *kata_suite(void)
 {
     Suite *suite = suite_create("Pencil Durability Kata");
@@ -261,6 +271,7 @@ Suite *kata_suite(void)
 
     // Erase
     tcase_add_test(erase_tcase, test_verify_a_sentence_has_a_word_count_of_13);
+    tcase_add_test(erase_tcase, test_verify_an_empty_string_has_a_word_count_of_0);
     suite_add_tcase(suite, erase_tcase);
 
     return suite;

@@ -5,7 +5,7 @@
 
 bool paper_is_first_word(char *ptr)
 {
-    // Lookback and verify we don't have a NUL then check that we aren't
+    // Lookback and check if that is a NUL then check that we aren't
     // currently on a space.
     return (*(ptr - 1) == KATA_NUL && *ptr != KATA_SPACE);
 }

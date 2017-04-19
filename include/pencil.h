@@ -20,37 +20,26 @@ size_t paper_word_count(char *paper)
     size_t count = 0;
     char *ptr = paper;
 
-    for (size_t pos = 0, len = strnlen(paper, BUFSIZ); pos < len; ++pos, ++ptr) {
-        if (pos == 0 && *ptr != PENCIL_SPACE) {
+    do {
+        // Validate the pointer position.
+        if (!*ptr) {
+            break;
+        }
+
+        // Lookback and verify we don't have a NUL pointer then check that we
+        // aren't on a space.
+        if (*(ptr - 1) == '\0' && *ptr != PENCIL_SPACE) {
             count += 1;
         }
 
-        if (pos >= 1 && *ptr != PENCIL_SPACE && *(ptr - 1) == PENCIL_SPACE) {
+        // Lookback and see if the prior character was a space then check that
+        // we aren't currently on a space.
+        if (*(ptr - 1) == PENCIL_SPACE && *ptr != PENCIL_SPACE) {
             count += 1;
         }
-    }
+    } while (*(++ptr));
 
     return count;
-    /*
-        size_t count = 0;
-        const char *delimiter = " ";
-        char *state;
-        char *word;
-
-        word = strtok_r(paper, delimiter, &state);
-
-        if (word == NULL) {
-            return count;
-        }
-
-        count += 1;
-
-        while((word = strtok_r(NULL, delimiter, &state))) {
-            count += 1;
-        }
-
-        return count;
-    */
 }
 
 void pencil_ctor(Pencil *pencil, unsigned int point_durability)

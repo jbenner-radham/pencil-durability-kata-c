@@ -27,7 +27,10 @@ size_t paper_word_count(char *paper)
             break;
         }
 
-        if (paper_is_start_of_first_word(ptr) || paper_is_start_of_subsequent_word(ptr)) {
+        if (
+            paper_is_start_of_first_word(ptr) ||
+            paper_is_start_of_subsequent_word(ptr)
+        ) {
             count += 1;
         }
     } while (*(++ptr));

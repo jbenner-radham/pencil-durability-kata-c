@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "pencil.h"
+#include "kata.h"
 
 // Write
 START_TEST(test_it_writes_to_paper)
@@ -49,7 +49,7 @@ END_TEST
 
 START_TEST(test_expends_no_point_durability_writing_spaces)
 {
-    unsigned int actual = pencil_degradation(PENCIL_SPACE);
+    unsigned int actual = pencil_degradation(KATA_SPACE);
     unsigned int expected = 0;
 
     ck_assert_int_eq(actual, expected);
@@ -58,7 +58,7 @@ END_TEST
 
 START_TEST(test_expends_no_point_durability_writing_newlines)
 {
-    unsigned int actual = pencil_degradation(PENCIL_NEWLINE);
+    unsigned int actual = pencil_degradation(KATA_NEWLINE);
     unsigned int expected = 0;
 
     ck_assert_int_eq(actual, expected);

@@ -1,45 +1,19 @@
-#define _POSIX_C_SOURCE 200809L
+#ifndef PENCIL_H
+#define PENCIL_H
 
 #include <assert.h>
 #include <ctype.h>
 #include <stdio.h>
 #include <string.h>
+#include "kata.h"
 
 #define PENCIL_LENGTH (5)
-#define PENCIL_NEWLINE '\n'
-#define PENCIL_SPACE ' '
 
 typedef struct {
     unsigned int initial_point_durability;
     unsigned int length;
     unsigned int point_durability;
 } Pencil;
-
-size_t paper_word_count(char *paper)
-{
-    size_t count = 0;
-    char *ptr = paper;
-
-    do {
-        if (!*ptr) {
-            break;
-        }
-
-        // Lookback and verify we don't have a NUL pointer then check that we
-        // aren't currently on a space. This finds the first word.
-        if (*(ptr - 1) == '\0' && *ptr != PENCIL_SPACE) {
-            count += 1;
-        }
-
-        // Lookback and see if the prior character was a space then check that
-        // we aren't currently on a space. This finds subsequent words.
-        if (*(ptr - 1) == PENCIL_SPACE && *ptr != PENCIL_SPACE) {
-            count += 1;
-        }
-    } while (*(++ptr));
-
-    return count;
-}
 
 void pencil_ctor(Pencil *pencil, unsigned int point_durability)
 {
@@ -51,7 +25,7 @@ void pencil_ctor(Pencil *pencil, unsigned int point_durability)
 unsigned int pencil_degradation(char character)
 {
     // Whitespace doesn't degrade the pencil tip.
-    if (character == PENCIL_NEWLINE || character == PENCIL_SPACE) {
+    if (character == KATA_NEWLINE || character == KATA_SPACE) {
         return 0;
     }
 
@@ -121,3 +95,5 @@ char * pencil_write_to_paper(Pencil *pencil, const char *text, char *restrict pa
 
     return strncat(paper, text_buffer, BUFSIZ);
 }
+
+#endif // PENCIL_H

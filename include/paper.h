@@ -3,11 +3,9 @@
 
 #include <stdbool.h>
 
-bool paper_is_start_of_first_word(char *ptr)
+bool paper_is_start_of_first_word(size_t word_count, char *ptr)
 {
-    // Lookback and check if that is a NUL then check that we aren't
-    // currently on a space.
-    return (*(ptr - 1) == KATA_NUL && *ptr != KATA_SPACE);
+    return (word_count == 0 && *ptr != KATA_SPACE);
 }
 
 bool paper_is_start_of_subsequent_word(char *ptr)
@@ -28,7 +26,7 @@ size_t paper_word_count(char *paper)
         }
 
         if (
-            paper_is_start_of_first_word(ptr) ||
+            paper_is_start_of_first_word(count, ptr) ||
             paper_is_start_of_subsequent_word(ptr)
         ) {
             count += 1;
